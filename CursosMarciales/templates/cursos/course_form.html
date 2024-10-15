@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container mt-5">
+        <h3 class="text-center">{% if form.instance.pk %}Editar Curso{% else %}Crear Curso{% endif %}</h3>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+        </form>
+    </div>
+{% endblock %}

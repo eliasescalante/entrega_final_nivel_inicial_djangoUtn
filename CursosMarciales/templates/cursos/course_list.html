@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container mt-5">
+        <h2 class="text-center">Cursos Disponibles</h2>
+        {% if user.is_superuser %}
+        <a href="{% url 'cursos:course_create' %}" class="btn btn-success mb-3">Crear Curso</a>
+        {% endif %}
+        <div class="row">
+            {% for curso in cursos %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <img src="{{ curso.imagen }}" class="card-img-top" alt="{{ curso.nombre }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ curso.nombre }}</h5>
+                            <p class="card-text">{{ curso.descripcion|truncatewords:20 }}</p>
+                            <a href="{% url 'cursos:course_detail' curso.id %}" class="btn btn-primary">Ver Detalle</a>
+                            {% if user.is_superuser %}
+                                <a href="{% url 'cursos:course_update' curso.id %}" class="btn btn-warning">Editar</a>
+                                <form action="{% url 'cursos:course_delete' curso.id %}" method="post" style="display:inline;">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container mt-5">
+        <div class="card">
+        <img src="{{ curso.imagen }}" class="card-img-top" alt="{{ curso.nombre }}">
+        <div class="card-body">
+            <h3 class="card-title">{{ curso.nombre }}</h3>
+            <p class="card-text"><strong>Descripción:</strong> {{ curso.descripcion }}</p>
+            <p class="card-text"><strong>Profesor:</strong> {{ curso.profesor }}</p>
+            <p class="card-text"><strong>Monto:</strong> ${{ curso.monto }}</p>
+            <p class="card-text"><strong>Cupo:</strong> {{ curso.cupo }}</p>
+            <a href="{% url 'cursos:course_list' %}" class="btn btn-secondary">Volver a la Lista</a>
+        </div>
+        </div>
+    </div>
+{% endblock %}
